@@ -73,13 +73,18 @@ func (b Board) NextState(x int, y int) bool {
 	)
 }
 
-func (b Board) GoToNext() {
+func (b Board) getNextCells() [][]bool {
 	nextCells := NewCells(b.Width, b.Height)
 	for y := 0; y < b.Height; y++ {
 		for x := 0; x < b.Width; x++ {
 			nextCells[y][x] = b.NextState(x,y)
 		}
 	}
+	return nextCells
+}
+
+func (b Board) GoToNext() {
+	nextCells := b.getNextCells()
 	for y := 0; y < b.Height; y++ {
 		for x := 0; x < b.Width; x++ {
 			b.setState(x,y, nextCells[y][x])
