@@ -46,4 +46,36 @@ func TestGetNextState(t *testing.T) {
 	}
 }
 
+type TestCaseAlive struct {
+	x int
+	y int
+	expectedState bool
+}
 
+func TestAlive(t *testing.T) {
+	board := NewBoard(1,1)
+	board.Cells[0][0] = true
+	testCases := []TestCaseAlive{
+		TestCaseAlive{-1,-1,false},
+		TestCaseAlive{0,-1,false},
+		TestCaseAlive{1,-1,false},
+		TestCaseAlive{-1,0,false},
+		TestCaseAlive{0,0,true},
+		TestCaseAlive{1,0,false},
+		TestCaseAlive{-1,1,false},
+		TestCaseAlive{0,1,false},
+		TestCaseAlive{1,1,false},
+	}
+	for _,testCase := range testCases {
+		state := board.Alive(testCase.x, testCase.y)
+		if state != testCase.expectedState {
+			t.Errorf(
+				"Alive(%d, %d) = %t, wanted %t",
+				testCase.x,
+				testCase.y,
+				state,
+				testCase.expectedState,
+			)
+		}
+	}
+}
