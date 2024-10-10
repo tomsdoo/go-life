@@ -66,7 +66,7 @@ func (b Board) Neighbors(x int, y int) int {
 	return score
 }
 
-func (b Board) NextState(x int, y int) bool {
+func (b Board) nextState(x int, y int) bool {
 	return getNextState(
 		b.Alive(x, y),
 		b.Neighbors(x, y),
@@ -77,7 +77,7 @@ func (b Board) getNextCells() [][]bool {
 	nextCells := NewCells(b.Width, b.Height)
 	for y := 0; y < b.Height; y++ {
 		for x := 0; x < b.Width; x++ {
-			nextCells[y][x] = b.NextState(x,y)
+			nextCells[y][x] = b.nextState(x,y)
 		}
 	}
 	return nextCells
