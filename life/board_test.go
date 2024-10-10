@@ -79,3 +79,175 @@ func TestAlive(t *testing.T) {
 		}
 	}
 }
+
+type TestCell struct {
+	x int
+	y int
+	alive bool
+}
+
+type TestCaseNeighbors struct {
+	cells []TestCell
+	expectedScore int
+}
+
+func TestNeighbors(t *testing.T) {
+	board := NewBoard(3,3)
+	testCases := []TestCaseNeighbors{
+		TestCaseNeighbors{
+			[]TestCell{
+				TestCell{0,0,false},
+				TestCell{1,0,false},
+				TestCell{2,0,false},
+				TestCell{0,1,false},
+				TestCell{1,1,false},
+				TestCell{2,1,false},
+				TestCell{0,2,false},
+				TestCell{1,2,false},
+				TestCell{2,2,false},
+			},
+			0,
+		},
+		TestCaseNeighbors{
+			[]TestCell{
+				TestCell{0,0,true},
+				TestCell{1,0,false},
+				TestCell{2,0,false},
+				TestCell{0,1,false},
+				TestCell{1,1,false},
+				TestCell{2,1,false},
+				TestCell{0,2,false},
+				TestCell{1,2,false},
+				TestCell{2,2,false},
+			},
+			1,
+		},
+		TestCaseNeighbors{
+			[]TestCell{
+				TestCell{0,0,false},
+				TestCell{1,0,true},
+				TestCell{2,0,false},
+				TestCell{0,1,false},
+				TestCell{1,1,false},
+				TestCell{2,1,false},
+				TestCell{0,2,false},
+				TestCell{1,2,false},
+				TestCell{2,2,false},
+			},
+			1,
+		},
+		TestCaseNeighbors{
+			[]TestCell{
+				TestCell{0,0,false},
+				TestCell{1,0,false},
+				TestCell{2,0,true},
+				TestCell{0,1,false},
+				TestCell{1,1,false},
+				TestCell{2,1,false},
+				TestCell{0,2,false},
+				TestCell{1,2,false},
+				TestCell{2,2,false},
+			},
+			1,
+		},
+		TestCaseNeighbors{
+			[]TestCell{
+				TestCell{0,0,false},
+				TestCell{1,0,false},
+				TestCell{2,0,false},
+				TestCell{0,1,true},
+				TestCell{1,1,false},
+				TestCell{2,1,false},
+				TestCell{0,2,false},
+				TestCell{1,2,false},
+				TestCell{2,2,false},
+			},
+			1,
+		},
+		TestCaseNeighbors{
+			[]TestCell{
+				TestCell{0,0,false},
+				TestCell{1,0,false},
+				TestCell{2,0,false},
+				TestCell{0,1,false},
+				TestCell{1,1,false},
+				TestCell{2,1,true},
+				TestCell{0,2,false},
+				TestCell{1,2,false},
+				TestCell{2,2,false},
+			},
+			1,
+		},
+		TestCaseNeighbors{
+			[]TestCell{
+				TestCell{0,0,false},
+				TestCell{1,0,false},
+				TestCell{2,0,false},
+				TestCell{0,1,false},
+				TestCell{1,1,false},
+				TestCell{2,1,false},
+				TestCell{0,2,true},
+				TestCell{1,2,false},
+				TestCell{2,2,false},
+			},
+			1,
+		},
+		TestCaseNeighbors{
+			[]TestCell{
+				TestCell{0,0,false},
+				TestCell{1,0,false},
+				TestCell{2,0,false},
+				TestCell{0,1,false},
+				TestCell{1,1,false},
+				TestCell{2,1,false},
+				TestCell{0,2,false},
+				TestCell{1,2,true},
+				TestCell{2,2,false},
+			},
+			1,
+		},
+		TestCaseNeighbors{
+			[]TestCell{
+				TestCell{0,0,false},
+				TestCell{1,0,false},
+				TestCell{2,0,false},
+				TestCell{0,1,false},
+				TestCell{1,1,false},
+				TestCell{2,1,false},
+				TestCell{0,2,false},
+				TestCell{1,2,false},
+				TestCell{2,2,true},
+			},
+			1,
+		},
+		TestCaseNeighbors{
+			[]TestCell{
+				TestCell{0,0,true},
+				TestCell{1,0,true},
+				TestCell{2,0,true},
+				TestCell{0,1,true},
+				TestCell{1,1,true},
+				TestCell{2,1,true},
+				TestCell{0,2,true},
+				TestCell{1,2,true},
+				TestCell{2,2,true},
+			},
+			8,
+		},
+	}
+
+	for testCaseIndex,testCase := range testCases {
+		for _,testCell := range testCase.cells {
+			board.Cells[testCell.y][testCell.x] = testCell.alive
+		}
+		score := board.Neighbors(1,1)
+		if score != testCase.expectedScore {
+			t.Errorf(
+				"testCaseIndex: %d Neighbor(1, 1) = %d, wanted %d",
+				testCaseIndex,
+				score,
+				testCase.expectedScore,
+			)
+		}
+	}
+}
