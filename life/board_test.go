@@ -86,15 +86,15 @@ type TestCell struct {
 	alive bool
 }
 
-type TestCaseNeighbors struct {
+type TestCaseNeighborsAlive struct {
 	cells []TestCell
 	expectedScore int
 }
 
-func TestNeighbors(t *testing.T) {
+func TestNeighborsAlive(t *testing.T) {
 	board := NewBoard(3,3)
-	testCases := []TestCaseNeighbors{
-		TestCaseNeighbors{
+	testCases := []TestCaseNeighborsAlive{
+		TestCaseNeighborsAlive{
 			[]TestCell{
 				TestCell{0,0,false},
 				TestCell{1,0,false},
@@ -108,7 +108,7 @@ func TestNeighbors(t *testing.T) {
 			},
 			0,
 		},
-		TestCaseNeighbors{
+		TestCaseNeighborsAlive{
 			[]TestCell{
 				TestCell{0,0,true},
 				TestCell{1,0,false},
@@ -122,7 +122,7 @@ func TestNeighbors(t *testing.T) {
 			},
 			1,
 		},
-		TestCaseNeighbors{
+		TestCaseNeighborsAlive{
 			[]TestCell{
 				TestCell{0,0,false},
 				TestCell{1,0,true},
@@ -136,7 +136,7 @@ func TestNeighbors(t *testing.T) {
 			},
 			1,
 		},
-		TestCaseNeighbors{
+		TestCaseNeighborsAlive{
 			[]TestCell{
 				TestCell{0,0,false},
 				TestCell{1,0,false},
@@ -150,7 +150,7 @@ func TestNeighbors(t *testing.T) {
 			},
 			1,
 		},
-		TestCaseNeighbors{
+		TestCaseNeighborsAlive{
 			[]TestCell{
 				TestCell{0,0,false},
 				TestCell{1,0,false},
@@ -164,7 +164,7 @@ func TestNeighbors(t *testing.T) {
 			},
 			1,
 		},
-		TestCaseNeighbors{
+		TestCaseNeighborsAlive{
 			[]TestCell{
 				TestCell{0,0,false},
 				TestCell{1,0,false},
@@ -178,7 +178,7 @@ func TestNeighbors(t *testing.T) {
 			},
 			1,
 		},
-		TestCaseNeighbors{
+		TestCaseNeighborsAlive{
 			[]TestCell{
 				TestCell{0,0,false},
 				TestCell{1,0,false},
@@ -192,7 +192,7 @@ func TestNeighbors(t *testing.T) {
 			},
 			1,
 		},
-		TestCaseNeighbors{
+		TestCaseNeighborsAlive{
 			[]TestCell{
 				TestCell{0,0,false},
 				TestCell{1,0,false},
@@ -206,7 +206,7 @@ func TestNeighbors(t *testing.T) {
 			},
 			1,
 		},
-		TestCaseNeighbors{
+		TestCaseNeighborsAlive{
 			[]TestCell{
 				TestCell{0,0,false},
 				TestCell{1,0,false},
@@ -220,7 +220,7 @@ func TestNeighbors(t *testing.T) {
 			},
 			1,
 		},
-		TestCaseNeighbors{
+		TestCaseNeighborsAlive{
 			[]TestCell{
 				TestCell{0,0,true},
 				TestCell{1,0,true},
@@ -240,10 +240,10 @@ func TestNeighbors(t *testing.T) {
 		for _,testCell := range testCase.cells {
 			board.Cells[testCell.y][testCell.x] = testCell.alive
 		}
-		score := board.Neighbors(1,1)
+		score := board.neighborsAlive(1,1)
 		if score != testCase.expectedScore {
 			t.Errorf(
-				"testCaseIndex: %d Neighbor(1, 1) = %d, wanted %d",
+				"testCaseIndex: %d neighborAlive(1, 1) = %d, wanted %d",
 				testCaseIndex,
 				score,
 				testCase.expectedScore,

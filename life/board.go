@@ -51,7 +51,7 @@ func (b Board) Alive(x int, y int) bool {
 	return b.Cells[y][x]
 }
 
-func (b Board) Neighbors(x int, y int) int {
+func (b Board) neighborsAlive(x int, y int) int {
 	score := 0
 	for _,dx := range []int{-1,0,1} {
 		for _,dy := range []int{-1,0,1} {
@@ -69,7 +69,7 @@ func (b Board) Neighbors(x int, y int) int {
 func (b Board) nextState(x int, y int) bool {
 	return getNextState(
 		b.Alive(x, y),
-		b.Neighbors(x, y),
+		b.neighborsAlive(x, y),
 	)
 }
 
