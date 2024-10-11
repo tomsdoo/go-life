@@ -67,10 +67,10 @@ func TestAlive(t *testing.T) {
 		TestCaseAlive{1,1,false},
 	}
 	for _,testCase := range testCases {
-		state := board.Alive(testCase.x, testCase.y)
+		state := board.alive(testCase.x, testCase.y)
 		if state != testCase.expectedState {
 			t.Errorf(
-				"Alive(%d, %d) = %t, wanted %t",
+				"alive(%d, %d) = %t, wanted %t",
 				testCase.x,
 				testCase.y,
 				state,

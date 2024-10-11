@@ -38,7 +38,7 @@ func (b Board) Seed() {
 	}
 }
 
-func (b Board) Alive(x int, y int) bool {
+func (b Board) alive(x int, y int) bool {
 	if(x < 0 || x >= b.Width) {
 		return false
 	}
@@ -58,7 +58,7 @@ func (b Board) neighborsAlive(x int, y int) int {
 			if (dx == 0 && dy == 0) {
 				continue
 			}
-			if (b.Alive(x + dx, y + dy)) {
+			if (b.alive(x + dx, y + dy)) {
 				score++
 			}
 		}
@@ -68,7 +68,7 @@ func (b Board) neighborsAlive(x int, y int) int {
 
 func (b Board) nextState(x int, y int) bool {
 	return getNextState(
-		b.Alive(x, y),
+		b.alive(x, y),
 		b.neighborsAlive(x, y),
 	)
 }
@@ -99,7 +99,7 @@ func (b Board) String() string {
 	for y := 0; y < b.Height; y++ {
 		for x := 0; x < b.Width; x++ {
 			bt = ' '
-			if(b.Alive(x,y)) {
+			if(b.alive(x,y)) {
 				bt = '*'
 			}
 			buf = append(buf, bt)
