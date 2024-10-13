@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - feature/ci
 
 jobs:
   build:
@@ -21,5 +20,3 @@ jobs:
       - run: go test go-life/life
 
       - run: go build -o lifegame app/main.go
-
-      - run: ls
