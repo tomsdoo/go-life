@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - feature/ci
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22.0'
+
+      - run: go test go-life/life
+
+      - run: go build -o lifegame app/main.go
+
+      - run: ls
