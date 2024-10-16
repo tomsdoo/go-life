@@ -12,7 +12,10 @@ func main() {
 	for i := 0; i < 300; i++ {
 		fmt.Print("\x0c", board.String())
 		time.Sleep(time.Second / 30)
-		board.GoToNext()
+		changed := board.GoToNext()
+		if changed == false {
+			break
+		}
 	}
 }
 
