@@ -83,13 +83,16 @@ func (b Board) getNextCells() [][]bool {
 	return nextCells
 }
 
-func (b Board) GoToNext() {
+func (b Board) GoToNext() bool {
 	nextCells := b.getNextCells()
+	changed := false
 	for y := 0; y < b.Height; y++ {
 		for x := 0; x < b.Width; x++ {
+			changed = changed || nextCells[y][x] != b.alive(x, y)
 			b.setState(x,y, nextCells[y][x])
 		}
 	}
+	return changed
 }
 
 func (b Board) String() string {
