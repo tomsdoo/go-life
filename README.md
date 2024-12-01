@@ -3,7 +3,7 @@
 #### with docker
 
 ``` sh
-node build
+docker image build --no-cache -f Dockerfile -t go-life:v1.0.0 .
 ```
 
 ``` sh
