@@ -6,11 +6,17 @@
 #### with docker
 
 ``` sh
-docker image build --no-cache -f Dockerfile -t go-life:v1.0.0 .
+docker run --rm $(docker build -q .)
+```
+
+### compose
+
+``` sh
+docker compose up
 ```
 
 ``` sh
-docker run -it --rm go-life:v1.0.0
+docker compose down
 ```
 
 #### run locally
