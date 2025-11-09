@@ -9,6 +9,10 @@
 docker run --rm $(docker build -q .)
 ```
 
+``` sh
+docker run --rm ghcr.io/tomsdoo/go-life:main
+```
+
 ### compose
 
 ``` sh
